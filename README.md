@@ -51,7 +51,7 @@ Installation
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/jovejob/typescript-express-api.git
 cd typescript-express-api
 ```
 
@@ -74,7 +74,7 @@ npm run dev
 - Build for production:
 
 ```bash
-npm run dev
+npm run build
 ```
 
 - Run in production mode: (Requires a build first)

@@ -1,16 +1,19 @@
 import { Router } from 'express';
 import { readPlayers, writePlayers } from '../storage';
-import { Player } from '../types';
+import { Player, Api } from '../types';
 
 const router = Router();
 
 // GET all players
 router.get('/', async (req, res) => {
   const players = await readPlayers();
-  res.json({
+
+  const response: Api = {
     message: 'Successfully retrieved all players.',
     data: players,
-  });
+  };
+
+  res.json(response);
 });
 
 // GET a single player by ID
@@ -22,10 +25,12 @@ router.get('/:id', async (req, res) => {
     return res.status(404).json({ message: 'Player not found.' });
   }
 
-  res.json({
+  const response: Api = {
     message: 'Successfully retrieved player.',
     data: player,
-  });
+  };
+
+  res.json(response);
 });
 
 // POST a new player
@@ -46,10 +51,13 @@ router.post('/', async (req, res) => {
   players.push(newPlayer);
   await writePlayers(players);
 
-  res.status(201).json({
+  const response: Api = {
     message: 'Player created successfully.',
     data: newPlayer,
-  });
+  };
+
+  res.status(201).json(response);
 });
 
 export default router;
+

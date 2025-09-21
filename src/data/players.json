@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Player A",
+    "balance": 500
+  },
+  {
+    "id": 2,
+    "name": "Player B",
+    "balance": 600
+  },
+  {
+    "id": 3,
+    "name": "Jove Trajkoski",
+    "balance": 1500
+  }
+]

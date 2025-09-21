@@ -1,5 +1,6 @@
 import { readPlayers, writePlayers } from '../storage';
 import { Player } from '../types';
+import { generateRandomNumber } from './random.service';
 
 // The data for the new player, excluding the ID.
 type NewPlayerData = Omit<Player, 'id'>;
@@ -25,4 +26,21 @@ export const createNewPlayer = async (playerData: NewPlayerData): Promise<Player
   players.push(newPlayer);
   await writePlayers(players);
   return newPlayer;
+};
+
+export const performSpin = async (id: number): Promise<{ updatedPlayer: Player; spinValue: number } | null> => {
+  const players = await readPlayers();
+  const playerIndex = players.findIndex(p => p.id === id);
+
+  if (playerIndex === -1) {
+    return null; // Player not found
+  }
+
+  const spinValue = generateRandomNumber();
+  const player = players[playerIndex];
+  player.balance += spinValue;
+
+  await writePlayers(players);
+
+  return { updatedPlayer: player, spinValue };
 };

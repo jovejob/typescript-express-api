@@ -40,3 +40,20 @@ export const handleCreatePlayer = async (req: Request, res: Response) => {
     sendError(res, 500, 'An unexpected error occurred.');
   }
 };
+
+export const handleSpin = async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const result = await playerService.performSpin(id);
+
+    if (!result) {
+      return sendError(res, 404, 'Player not found.');
+    }
+
+    const message = `Player ${result.updatedPlayer.name} spun a ${result.spinValue}! New balance is ${result.updatedPlayer.balance}.`;
+    sendSuccess(res, 200, message, result.updatedPlayer);
+
+  } catch (error) {
+    sendError(res, 500, 'An unexpected error occurred during the spin.');
+  }
+};

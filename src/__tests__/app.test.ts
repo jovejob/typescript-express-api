@@ -18,7 +18,8 @@ describe('API Endpoints', () => {
       const res = await request(app).get('/random');
       expect(res.statusCode).toEqual(200);
       expect(res.body).toHaveProperty('data');
-      const randomNumber = res.body.data;
+      expect(res.body.data).toHaveProperty('random');
+      const randomNumber = res.body.data.random;
       expect(typeof randomNumber).toBe('number');
       expect(randomNumber).toBeGreaterThanOrEqual(1);
       expect(randomNumber).toBeLessThanOrEqual(100);
